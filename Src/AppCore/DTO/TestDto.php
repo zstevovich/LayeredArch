@@ -18,4 +18,17 @@ class TestDto extends \AppCore\BaseDTO
             'description' => DescriptionDTO::fromEntity($post->getDescription())
         ]);
     }
+
+    public static function fromCollection(array $posts) : array
+    {
+        $postCollection = [];
+        if (!empty($posts)){
+            foreach ($posts as $post){
+                if ($post instanceof Post){
+                    $postCollection[] = self::fromEntity($post);
+                }
+            }
+        }
+        return $postCollection;
+    }
 }
